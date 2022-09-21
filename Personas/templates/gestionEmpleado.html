@@ -1,0 +1,86 @@
+{% extends "./base.html" %}
+
+{% block title %} Usuarios {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-3  ">
+        <h2 style="text-align:center;color:white;font-weight:550;">Registrar Usuario</h2><br>
+        <div class="card ">
+            <div class="card-body">
+                <form action="/registrarEmpleados/" method="POST"> {% csrf_token %}
+                    <div class="form-group py-2">
+                        <input type="number" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Codigo" minlength="5" maxlength="20" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" maxlength="50" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" maxlength="50" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="number" id="txtEdad" name="txtEdad" class="form-control" placeholder="Edad" maxlength="50" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="number" id="txtPeso" name="txtPeso" class="form-control" placeholder="Peso" maxlength="50" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="number" id="txtFCardiaca" name="txtFCardiaca" class="form-control" placeholder="Frecuencia Cardiaca" maxlength="50" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="number" id="txtStress" name="txtStress" class="form-control" placeholder="Nivel de Estrés" maxlength="50" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="number" id="txtSOSangre" name="txtSOSangre" class="form-control" placeholder="Saturación de Oxigeno en Sangre" maxlength="50" required>
+                    </div>
+                    <div class="form-group d-grid gap-2 py-2">
+                        <button type="submit" class="btn btn-success btn-block text-light ">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-9">
+        <h2 style="color:white;font-weight:400; text-align:center;">Listado de Usuarios</h2><br>
+        <div class="table-responsive py-2">
+            
+            <table style="background-color: white; padding:20px" class="table table-striped">
+                
+                <thead>
+                    <tr>
+                        
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>Peso (Kg)</th>
+                        <th>F. Cardiaca BPM/PPM</th>
+                        <th>Nivel de Estrés</th>
+                        <th>Saturacion de oxigeno en sangre (SpO2)</th>
+                        <th style="text-align:center;">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in empleados %}
+                    <tr>
+                  
+                        <td>{{c.codigo}}</td>
+                        <td>{{c.nombre}}</td>
+                        <td>{{c.apellido}}</td>
+                        <td>{{c.edad}}</td>
+                        <td>{{c.peso}}</td>
+                        <td>{{c.Fcardiaca}}</td>
+                        <td>{{c.stress}}</td>
+                        <td>{{c.SOsangre}}</td>
+                        <td><a href="editarEmpleado/{{c.codigo}}" class="btn btn-info text-light">Editar</a> <a href="eliminarEmpleado/{{c.codigo}}" class="btn btn-danger">Eliminar</a></td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
